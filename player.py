@@ -9,7 +9,7 @@ class Player:
         self.balance = balance
         self.assets = assets
 
-    def roll_dice(self):
+    def _dice(self):
         print("enter 'roll' to roll the die")
         roll_dice = input(" ")
         n = random.randint(0, 6)
@@ -18,8 +18,8 @@ class Player:
 
 player1 = Player(name='Peter')
 player2 = Player(name='Jack')
-player1.roll_dice()
-player2.roll_dice()
+player1._dice()
+player2._dice()
 
 
 
