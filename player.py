@@ -9,6 +9,12 @@ class Player:
         self.balance = balance
         self.assets = assets
 
+    def update_balance(self, amount):
+        self.balance += amount
+
+    def get_balance(self):
+        return self.balance
+
     def _dice(self):
         print("enter 'roll' to roll the die")
         roll_dice = input(" ")
