@@ -103,7 +103,7 @@ class Game:
         if self.is_player_bankrupt(player) is True:
             return -1
 
-        if not self.bank_has_enough_balance:
+        if not self.bank_has_enough_balance():
             return -1
 
         # Declare other events that can happen here
