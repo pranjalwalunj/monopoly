@@ -12,7 +12,7 @@ class Player:
     def give_name(self):
         print("enter your name :")
         your_name = input(" ")
-        print(your_name, "is added successfully")
+        print("{}'s is added successfully".format(your_name))
 
     def update_balance(self, amount):
         self.balance += amount
