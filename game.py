@@ -29,7 +29,7 @@ class Game:
 
 
     def transact(self, player, amount):
-        self.bank_balance += amount
+        self.bank_balance -= amount
         player.update_balance(amount)
 
     def bank_has_enough_balance(self):
