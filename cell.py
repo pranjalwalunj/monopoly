@@ -1,8 +1,8 @@
 class Cell:
-    def __init__(self, name, price, owner):
+    def __init__(self, name, price, owner=None):
         self.name = name
         self.price = price
-        self.owner == None
+        self.owner = None
 
     def get_cell_owner(self):
         return self.owner

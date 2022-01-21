@@ -9,10 +9,16 @@ class Player:
         self.balance = balance
         self.assets = assets
 
+    def give_name(self):
+        print("enter your name :")
+        your_name = input(" ")
+        print(your_name, "is added successfully")
+
     def update_balance(self, amount):
         self.balance += amount
 
     def get_balance(self):
+        print("{}'s current balance is {} ".format(self.name, self.balance))
         return self.balance
 
     def _dice(self):
@@ -22,8 +28,10 @@ class Player:
         print(n)
 
 
-player1 = Player(name='Peter')
-player2 = Player(name='Jack')
+player1 = Player(name=())
+player2 = Player(name=())
+player1.give_name()
+player2.give_name()
 player1._dice()
 player2._dice()
 
