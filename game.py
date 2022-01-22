@@ -49,7 +49,7 @@ class Game:
             just declare him/her the winner
         """
         if winner:
-            return winner, winner.networth
+            return winner, winner.calculate_networth()
 
         player1_networth = player1.calculate_networth()
         player2_networth = player2.calculate_networth()

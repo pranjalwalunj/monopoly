@@ -1,4 +1,5 @@
 import random
+from board import BOARD
 
 
 class Player:
@@ -8,11 +9,6 @@ class Player:
         self.location = location
         self.balance = balance
         self.assets = assets
-
-    def give_name(self):
-        print("enter your name :")
-        your_name = input(" ")
-        print("{}'s is added successfully".format(your_name))
 
     def update_balance(self, amount):
         self.balance += amount
@@ -26,6 +22,26 @@ class Player:
         roll_dice = input(" ")
         n = random.randint(0, 6)
         print(n)
+        self.location + n % len(BOARD)
+
+    def add_asset(self, single_cell):
+        """
+        Single cell object is added
+        :param single_cell: Cell object
+        :return:
+        """
+        self.assets.append(single_cell)
+
+    def calculate_networth(self):
+        """
+        Initialising balance of player. Calculating the total networth with the no of asset of
+        player and remaining balance.
+        :return:
+        """
+        networth = self.balance
+        for asset in self.assets:
+            networth += asset.get_cell_price()
+        return networth
 
 
 player1 = Player(name=())
