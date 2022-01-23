@@ -44,14 +44,6 @@ class Player:
         return networth
 
 
-player1 = Player(name=())
-player2 = Player(name=())
-player1.give_name()
-player2.give_name()
-player1._dice()
-player2._dice()
-
-
 
 
 

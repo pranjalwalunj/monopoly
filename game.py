@@ -1,5 +1,7 @@
 import time
 
+from player import Player
+
 class Game:
 
     def __init__(self, game_duration=1200, bank_balance=50000):
@@ -113,39 +115,44 @@ if __name__ == '__main__':
     game = Game()
 
     # Initialize players here (create the player objects) and pass them in game.start()
+    player1 = Player(name='Peter')
+    player2 = Player(name='Jack')
 
-    game.start()
+    game.start(player1=player1, player2=player2)
 
+    winner = None
+    
     while time.time() <= game.stop_epoch:
-        pass
-
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-        # Below commented code are some hints on what you should do next
-        # You dont have to neccessarily do the same thing. (brownie points if you do it your way)
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-
+        
         # Player 1's turn
-        # print(f"It is {player1}'s turn!")
+        print(f"It is {player1}'s turn!")
 
-        # player_input = input()
-        # if player_input == 'roll':
-        # player1.roll_dice()
-        # event_outcome = game.handle_events(player1)
-        # if event_outcome == -1:
-        #     break
+        player1_input = input()
+        if player1_input == 'roll':
+            player1.roll_dice()
+            event_outcome = game.handle_events(player1)
+            if event_outcome == -1:
+                winner = game.declare_winner(player1, player2, winner=player2)
+                break
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
         # Player 2's turn
-        # print(f"It is {player1}'s turn!")
+        print(f"It is {player2}'s turn!")
+        player2_input = input()
+        if player2_input == 'roll':
+            player2.roll_dice()
+            event_outcome = game.handle_events(player2)
+            if event_outcome == -1:
+                winner = game.declare_winner(player1, player2, winner=player1)
+                break
 
-        # player_input = input()
-        # if player_input == 'roll':
-        # player1.roll_dice()
-        # event_outcome = game.handle_events(player2)
+    if winner:
+        print('Congratulations {winner.name}! Your networth is Rs.{winner.calculate_networth()} and you won the game.')
 
-    # winner = game.declare_winner(player1, player2)
-    # if winner == None:
-    #     print('Its a draw!! Both of your networth is Rs.{player1.calculate_networth()}')
-    # else:
-    #     print('Congratulations {winner.name}! Your networth is Rs.{winner.calculate_networth()}')
+    else:
+        winner = game.declare_winner(player1, player2)
+        if winner is None:
+            print('Its a draw!! Both of your networth is Rs.{player1.calculate_networth()}')
+        else:
+            print('Congratulations {winner.name}! Your networth is Rs.{winner.calculate_networth()}')
