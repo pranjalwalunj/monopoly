@@ -19,7 +19,7 @@ class Game:
         We have two values, the start_epoch and the stop epoch. Epoch is a term used to define a
         certain unique point of time in computing.
 
-        Essentially, most computers start computing time from the midnight of 1st of January, 1970.
+        Essentially, most computers start computing time from the midnight of 1st of January 1970.
         The epoch time at any point denotes the amount of seconds passed since that point till now.
 
         time.time() helps you with that. All we are doing is, we are finding out the epoch time at which
@@ -101,10 +101,11 @@ class Game:
         These are the events that will be checked on every turn of the player.
         One of them is bankruptcy. Find out other possibilites :)
         """
+        cell = player.get_cell()
         if player.has_enough_balance() is True:
             buy = input("Do you want to buy this cell? ")
             if buy == "yes":
-                cell = player.get_cell()
+                cell.is_cell_owned()
                 self.transact(player, -cell.get_cell_price())
                 player.add_asset(cell)
                 for asset in player.assets:
@@ -143,8 +144,6 @@ if __name__ == '__main__':
                 winner = game.declare_winner(player1, player2, winner=player2)
                 break
 
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-
         # Player 2's turn
         print(f"It is {player2.get_name()}'s turn!")
         player2_input = input()
@@ -156,7 +155,7 @@ if __name__ == '__main__':
                 break
 
     if winner:
-        print('Congratulations {winner.name}! Your networth is Rs.{winner.calculate_networth()} and you won the game.')
+        print(f'Congratulations {winner.name}! Your networth is Rs.{winner.calculate_networth()} and you won the game.')
 
     else:
         winner = game.declare_winner(player1, player2)

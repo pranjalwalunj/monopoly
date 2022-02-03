@@ -35,10 +35,11 @@ class Player:
     def roll_dice(self):
         n = random.randint(1, 7)
         print(n)
-        self.location = self.location + n % len(BOARD)
+        self.location = (self.location + n) % len(BOARD)
 
         cell = self.get_cell()
         print(cell.get_cell_name(), cell.get_cell_price())
+
 
     def add_asset(self, single_cell):
         """
