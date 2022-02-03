@@ -26,6 +26,10 @@ class Player:
     def get_cell(self):
         return BOARD[self.location]
 
+    def get_location_index(self):
+        cell = self.get_cell()
+        return BOARD.index(cell)
+
     def has_enough_balance(self):
         if self.get_balance() >= self.location:
             print("You can buy this cell.")
@@ -34,19 +38,17 @@ class Player:
 
     def roll_dice(self):
         n = random.randint(1, 7)
-        print(n)
         self.location = (self.location + n) % len(BOARD)
-
         cell = self.get_cell()
-        print(cell.get_cell_name(), cell.get_cell_price())
-
-
+        print(f'{self.get_name()} has rolled {n}! and landed on {cell.get_cell_name()}.')
+    
     def add_asset(self, single_cell):
         """
         Single cell object is added
         :param single_cell: Cell object
         :return:
         """
+        single_cell.set_owner(self)
         self.assets.append(single_cell)
 
     def calculate_networth(self):

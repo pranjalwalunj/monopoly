@@ -31,7 +31,6 @@ class Game:
         self.stop_epoch = self.start_epoch + self.duration
 
     def transact(self, player, amount):
-        player.location -= amount
         self.bank_balance -= amount
         player.update_balance(amount)
 
@@ -162,4 +161,4 @@ if __name__ == '__main__':
         if winner is None:
             print('Its a draw!! Both of your networth is Rs.{player1.calculate_networth()}')
         else:
-            print('Congratulations {winner.name}! Your networth is Rs.{winner.winner_networth}')
+            print(f'Congratulations {winner.name}! Your networth is Rs.{winner.winner_networth}')
