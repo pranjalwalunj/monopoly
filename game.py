@@ -26,11 +26,12 @@ class Game:
         the game should end, hence we are adding 1200 seconds to the start time of the game. After that
         we simply do a while loop and continue it until it reaches stop_epoch's value.
         """
+
         self.start_epoch = time.time()
         self.stop_epoch = self.start_epoch + self.duration
 
-
     def transact(self, player, amount):
+        player.location -= amount
         self.bank_balance -= amount
         player.update_balance(amount)
 
@@ -39,7 +40,6 @@ class Game:
             return False
         return True
 
-    
     def declare_winner(self, player1, player2, winner=None):
         """
         At this point, we know the game has ended and has been won by a player. Through this
@@ -101,6 +101,14 @@ class Game:
         These are the events that will be checked on every turn of the player.
         One of them is bankruptcy. Find out other possibilites :)
         """
+        if player.has_enough_balance() is True:
+            buy = input("Do you want to buy this cell? ")
+            if buy == "yes":
+                cell = player.get_cell()
+                self.transact(player, -cell.get_cell_price())
+                player.add_asset(cell)
+                for asset in player.assets:
+                    print(asset.name)
 
         if self.is_player_bankrupt(player) is True:
             return -1
@@ -125,7 +133,7 @@ if __name__ == '__main__':
     while time.time() <= game.stop_epoch:
         
         # Player 1's turn
-        print(f"It is {player1}'s turn!")
+        print(f"It is {player1.get_name()}'s turn!")
 
         player1_input = input()
         if player1_input == 'roll':
@@ -138,7 +146,7 @@ if __name__ == '__main__':
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
         # Player 2's turn
-        print(f"It is {player2}'s turn!")
+        print(f"It is {player2.get_name()}'s turn!")
         player2_input = input()
         if player2_input == 'roll':
             player2.roll_dice()
