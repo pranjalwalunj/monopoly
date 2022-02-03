@@ -92,7 +92,7 @@ class Game:
         Finding out if a player has gone bankrupt or not.
         """
         player_balance = player.get_balance()
-        if player_balance < 0:
+        if player_balance <= 0:
             return True
         return False
 
@@ -141,7 +141,7 @@ if __name__ == '__main__':
             player1.roll_dice()
             event_outcome = game.handle_events(player1)
             if event_outcome == -1:
-                winner = game.declare_winner(player1, player2, winner=player2)
+                winner, winner_networth = game.declare_winner(player1, player2, winner=player2)
                 break
 
         # Player 2's turn
@@ -151,15 +151,15 @@ if __name__ == '__main__':
             player2.roll_dice()
             event_outcome = game.handle_events(player2)
             if event_outcome == -1:
-                winner = game.declare_winner(player1, player2, winner=player1)
+                winner, winner_networth = game.declare_winner(player1, player2, winner=player1)
                 break
 
     if winner:
-        print(f'Congratulations {winner.name}! Your networth is Rs.{winner.calculate_networth()} and you won the game.')
+        print(f'Congratulations {winner.name}! Your networth is Rs.{winner_networth} and you won the game.')
 
     else:
-        winner = game.declare_winner(player1, player2)
+        winner, winner_networth = game.declare_winner(player1, player2)
         if winner is None:
             print('Its a draw!! Both of your networth is Rs.{player1.calculate_networth()}')
         else:
-            print('Congratulations {winner.name}! Your networth is Rs.{winner.calculate_networth()}')
+            print('Congratulations {winner.name}! Your networth is Rs.{winner.winner_networth}')
