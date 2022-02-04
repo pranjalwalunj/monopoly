@@ -40,8 +40,13 @@ class Player:
         return False
 
     def roll_dice(self):
-        n = random.randint(1, 7)
+        n = random.randint(1, 6)
+        current_location = self.location
         self.location = (self.location + n) % len(BOARD)
+        next_location = self.location
+        if current_location not in [0, 1, 2, 3, 4, 5, 6] and next_location in [0, 1, 2, 3, 4, 5, 6]:
+            self.update_balance(500)
+            print('You received 500.')
         cell = self.get_cell()
         print(f'{self.get_name()} has rolled {n}! and landed on {cell.get_cell_name()}.'
               f' The price is {cell.get_cell_price()}')
