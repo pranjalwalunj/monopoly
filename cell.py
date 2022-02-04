@@ -1,3 +1,5 @@
+import random
+
 class Cell:
     def __init__(self, name, price, owner=None):
         self.name = name
@@ -12,6 +14,12 @@ class Cell:
 
     def get_cell_price(self):
         return self.price
+
+    def get_chest(self):
+        a = random.randint(1, 5)
+        com_chest = {1: -1000, 2: 2000, 3: -500, 4: 250, 5: -0.5}
+        print(a)
+        return com_chest[a]
 
     def set_owner(self, player):
         if self.owner is None:
