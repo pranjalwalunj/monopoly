@@ -111,6 +111,9 @@ class Game:
         if cell.get_cell_name() in ['Motel', 'Jail', 'Club']:
             self.transact(player, -cell.get_cell_price())
 
+        if cell.get_cell_name() in ['Community Chest']:
+            self.transact(player, cell.get_chest())
+
         else:
             if cell.is_cell_owned():
                 if cell.get_cell_owner() != player:
