@@ -123,8 +123,6 @@ class Game:
                     self.transact(player, -cell.get_cell_price())
                     player.add_asset(cell)
                     cell.set_owner(player)
-                    for asset in player.get_assets():
-                        print(asset.name)
 
         if self.is_player_bankrupt(player) is True:
             return -1
@@ -175,6 +173,6 @@ if __name__ == '__main__':
     else:
         winner, winner_networth = game.declare_winner(player1, player2)
         if winner is None:
-            print('Its a draw!! Both of your networth is Rs.{player1.calculate_networth()}')
+            print(f'Its a draw!! Both of your networth is Rs.{player1.calculate_networth()}')
         else:
             print(f'Congratulations {winner.name}! Your networth is Rs.{winner.winner_networth}')

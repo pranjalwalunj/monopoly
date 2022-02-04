@@ -4,11 +4,11 @@ from board import BOARD
 
 class Player:
 
-    def __init__(self, name, location=0, balance=5000, assets=[]):
+    def __init__(self, name, location=0, balance=5000):
         self.name = name
         self.location = location
         self.balance = balance
-        self.assets = assets
+        self.assets = []
 
     def get_name(self):
         return self.name
@@ -62,8 +62,13 @@ class Player:
         :return:
         """
         networth = self.balance
-        for asset in self.assets:
+        print('##############################')
+        print('Balance at the end of the round: {}'.format(networth))
+        print(f'{self.name} owns the following assets: ')
+        for asset in self.get_assets():
+            print(f'{asset.get_cell_name()} worth Rs. {asset.get_cell_price()}')
             networth += asset.get_cell_price()
+        print('##############################')
         return networth
 
 
