@@ -16,6 +16,9 @@ class Player:
     def get_location(self):
         return self.location
 
+    def get_assets(self):
+        return self.assets
+
     def update_balance(self, amount):
         self.balance += amount
 
@@ -40,7 +43,8 @@ class Player:
         n = random.randint(1, 7)
         self.location = (self.location + n) % len(BOARD)
         cell = self.get_cell()
-        print(f'{self.get_name()} has rolled {n}! and landed on {cell.get_cell_name()}.')
+        print(f'{self.get_name()} has rolled {n}! and landed on {cell.get_cell_name()}.'
+              f' The price is {cell.get_cell_price()}')
     
     def add_asset(self, single_cell):
         """

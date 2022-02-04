@@ -34,6 +34,12 @@ class Game:
         self.bank_balance -= amount
         player.update_balance(amount)
 
+    def pay_rent(self, tenant, landlord):
+        rent = 500
+        tenant.update_balance(-rent)
+        landlord.update_balance(rent)
+
+
     def bank_has_enough_balance(self):
         if self.bank_balance < 0:
             return False
@@ -101,14 +107,24 @@ class Game:
         One of them is bankruptcy. Find out other possibilites :)
         """
         cell = player.get_cell()
-        if player.has_enough_balance() is True:
-            buy = input("Do you want to buy this cell? ")
-            if buy == "yes":
-                cell.is_cell_owned()
-                self.transact(player, -cell.get_cell_price())
-                player.add_asset(cell)
-                for asset in player.assets:
-                    print(asset.name)
+
+        if cell.get_cell_name() in ['Motel', 'Jail', 'Club']:
+            self.transact(player, -cell.get_cell_price())
+
+        else:
+            if cell.is_cell_owned():
+                if cell.get_cell_owner() != player:
+                    tenant = player
+                    landlord = cell.get_cell_owner()
+                    self.pay_rent(tenant=tenant, landlord=landlord)
+            elif not cell.is_cell_owned() and player.has_enough_balance() is True:
+                buy = input("Do you want to buy this cell? ")
+                if buy == "yes":
+                    self.transact(player, -cell.get_cell_price())
+                    player.add_asset(cell)
+                    cell.set_owner(player)
+                    for asset in player.get_assets():
+                        print(asset.name)
 
         if self.is_player_bankrupt(player) is True:
             return -1

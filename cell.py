@@ -19,7 +19,6 @@ class Cell:
 
     def is_cell_owned(self):
         if self.owner is None:
-            print('This cell is not owned by anyone.')
             return False
         print(f'This cell is owned by {self.owner.name}')
         return True
